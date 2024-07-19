@@ -26,7 +26,7 @@ public class Window {
     private Window() {
         this.width = 1920;
         this.height = 1080;
-        this.title = "nekoGameEngine";
+        this.title = "rokiGameEngine";
         r = 1;
         g = 1;
         b = 1;
@@ -37,11 +37,11 @@ public class Window {
         switch (newScene) {
             case 0:
                 currentScene = new LevelEditorScene();
-                //currentScene.init();
+                currentScene.init();
                 break;
             case 1:
                 currentScene = new LevelScene();
-                //currentScene.init();
+                currentScene.init();
                 break;
             default:
                 assert false : "Unknown scene: " + newScene;
