@@ -1,4 +1,4 @@
-package roki.ec;
+package roki.entityComponent;
 
 public abstract class Component {
     public GameObject gameObject = null;

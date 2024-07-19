@@ -1,7 +1,7 @@
 package roki.renderer;
 
-import roki.ec.GameObject;
-import roki.ec.components.SpriteRenderer;
+import roki.entityComponent.GameObject;
+import roki.entityComponent.components.SpriteRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class Renderer {
         this.batches = new ArrayList<>();
     }
 
-    public void add(GameObject go){
+    public void add(GameObject go) {
         SpriteRenderer spr = go.getComponent(SpriteRenderer.class);
         if (spr != null) {
             add(spr);
@@ -23,8 +23,8 @@ public class Renderer {
 
     private void add(SpriteRenderer spr) {
         boolean added = false;
-        for(RenderBatch batch : batches) {
-            if(batch.hasRoom()) {
+        for (RenderBatch batch : batches) {
+            if (batch.hasRoom()) {
                 batch.addSprite(spr);
                 added = true;
                 break;
@@ -40,7 +40,7 @@ public class Renderer {
     }
 
     public void render() {
-        for(RenderBatch batch : batches) {
+        for (RenderBatch batch : batches) {
             batch.render();
         }
     }

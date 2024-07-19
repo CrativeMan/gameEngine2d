@@ -1,6 +1,6 @@
-package roki.ec.components;
+package roki.entityComponent.components;
 
-import roki.ec.Component;
+import roki.entityComponent.Component;
 
 public class FontRenderer extends Component {
 

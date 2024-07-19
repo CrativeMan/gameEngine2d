@@ -1,4 +1,4 @@
-package roki.ec;
+package roki.entityComponent;
 
 import java.util.ArrayList;
 import java.util.List;

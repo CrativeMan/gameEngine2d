@@ -14,7 +14,7 @@ import static org.lwjgl.opengl.GL20.*;
 public class Shader {
 
     private int shaderProgramID;
-    private boolean beingUsed = true;
+    private boolean beingUsed = false;
     private String vertexSource, fragmentSource;
     private String filepath;
 
@@ -168,6 +168,12 @@ public class Shader {
         int varLocation = glGetUniformLocation(shaderProgramID, varName);
         use();
         glUniform1i(varLocation, slot);
+    }
+
+    public void uploadIntArray(String varName, int[] array) {
+        int varLocation = glGetUniformLocation(shaderProgramID, varName);
+        use();
+        glUniform1iv(varLocation, array);
     }
 
 }

@@ -1,6 +1,6 @@
 package roki.scene;
 
-import roki.ec.GameObject;
+import roki.entityComponent.GameObject;
 import roki.renderer.Camera;
 import roki.renderer.Renderer;
 

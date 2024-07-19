@@ -2,11 +2,15 @@ package roki.scene.scenes;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import roki.ec.GameObject;
-import roki.ec.Transform;
-import roki.ec.components.SpriteRenderer;
+import roki.entityComponent.GameObject;
+import roki.entityComponent.Transform;
+import roki.entityComponent.components.SpriteRenderer;
+import roki.listeners.KeyListener;
 import roki.renderer.Camera;
 import roki.scene.Scene;
+import util.AssetPool;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class LevelEditorScene extends Scene {
 
@@ -15,7 +19,7 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
-        this.camera = new Camera(new Vector2f());
+        this.camera = new Camera(new Vector2f(-250, 0));
 
         int xOffset = 10;
         int yOffset = 10;
@@ -34,11 +38,28 @@ public class LevelEditorScene extends Scene {
                 this.addGameObjectToScene(go);
             }
         }
+
+        loadResources();
+    }
+
+    private void loadResources() {
+        AssetPool.getShader("assets/shaders/default.glsl");
     }
 
     @Override
     public void update(float dt) {
-        System.out.println("FPS: " + 1.0f / dt);
+
+        if (KeyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
+            camera.position.x += 100f * dt;
+        } else if (KeyListener.isKeyPressed(GLFW_KEY_LEFT)) {
+            camera.position.x -= 100f * dt;
+        }
+        if (KeyListener.isKeyPressed(GLFW_KEY_UP)) {
+            camera.position.y += 100f * dt;
+        } else if (KeyListener.isKeyPressed(GLFW_KEY_DOWN)) {
+            camera.position.y -= 100f * dt;
+        }
+
         for(GameObject go : this.gameObjects) {
             go.update(dt);
         }

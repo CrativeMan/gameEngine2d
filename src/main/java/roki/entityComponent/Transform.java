@@ -1,4 +1,4 @@
-package roki.ec;
+package roki.entityComponent;
 
 import org.joml.Vector2f;
 
