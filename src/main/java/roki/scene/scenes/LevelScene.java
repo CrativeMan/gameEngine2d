@@ -1,7 +1,7 @@
-package riko.scene.scenes;
+package roki.scene.scenes;
 
-import riko.Window;
-import riko.scene.Scene;
+import roki.Window;
+import roki.scene.Scene;
 
 public class LevelScene extends Scene {
 

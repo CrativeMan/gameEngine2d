@@ -1,13 +1,13 @@
-package riko;
+package roki;
 
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
-import riko.listeners.KeyListener;
-import riko.listeners.MouseListener;
-import riko.scene.Scene;
-import riko.scene.scenes.LevelEditorScene;
-import riko.scene.scenes.LevelScene;
+import roki.listeners.KeyListener;
+import roki.listeners.MouseListener;
+import roki.scene.Scene;
+import roki.scene.scenes.LevelEditorScene;
+import roki.scene.scenes.LevelScene;
 import util.Time;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -38,10 +38,12 @@ public class Window {
             case 0:
                 currentScene = new LevelEditorScene();
                 currentScene.init();
+                currentScene.start();
                 break;
             case 1:
                 currentScene = new LevelScene();
                 currentScene.init();
+                currentScene.start();
                 break;
             default:
                 assert false : "Unknown scene: " + newScene;
@@ -135,5 +137,9 @@ public class Window {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
+    }
+
+    public static Scene getScene() {
+        return get().currentScene;
     }
 }

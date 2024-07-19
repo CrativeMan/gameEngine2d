@@ -1,4 +1,4 @@
-import riko.Window;
+import roki.Window;
 
 public class Main {
     public static void main(String[] args) {
