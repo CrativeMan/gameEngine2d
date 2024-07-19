@@ -1,4 +1,4 @@
-package engine.scene;
+package riko.scene;
 
 public abstract class Scene {
     public Scene() {

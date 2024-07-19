@@ -1,13 +1,13 @@
-package engine;
+package riko;
 
-import engine.input.KeyListener;
-import engine.input.MouseListener;
-import engine.scene.Scene;
-import engine.scene.scenes.LevelEditorScene;
-import engine.scene.scenes.LevelScene;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+import riko.listeners.KeyListener;
+import riko.listeners.MouseListener;
+import riko.scene.Scene;
+import riko.scene.scenes.LevelEditorScene;
+import riko.scene.scenes.LevelScene;
 import util.Time;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
