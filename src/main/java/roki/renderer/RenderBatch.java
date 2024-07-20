@@ -1,6 +1,5 @@
 package roki.renderer;
 
-import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 import roki.Window;
@@ -249,7 +248,7 @@ public class RenderBatch implements Comparable<RenderBatch> {
     }
 
     @Override
-    public int compareTo(@NotNull RenderBatch o) {
-        return Integer.compare(this.zIndex, o.zIndex);
+    public int compareTo(RenderBatch o) {
+        return 0;
     }
 }

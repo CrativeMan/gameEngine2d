@@ -8,6 +8,7 @@ import roki.listeners.MouseListener;
 import roki.scene.Scene;
 import roki.scene.scenes.LevelEditorScene;
 import roki.scene.scenes.LevelScene;
+import roki.ui.ImGuiLayer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -21,6 +22,7 @@ public class Window {
     private int width, height;
     private String title;
     private long glfwWindow;
+    private ImGuiLayer imGuiLayer;
 
     private Window() {
         this.width = 1920;
@@ -96,6 +98,10 @@ public class Window {
         glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
         glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
         glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+        glfwSetWindowSizeCallback(glfwWindow, (w, newWidth, newHeight) -> {
+            Window.setWidth(newWidth);
+            Window.setHeight(newHeight);
+        });
 
         // opengl context current
         glfwMakeContextCurrent(glfwWindow);
@@ -116,6 +122,8 @@ public class Window {
         // enabling alpha
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        this.imGuiLayer = new ImGuiLayer(glfwWindow);
+        this.imGuiLayer.initImGui();
 
         Window.changeScene(0);
     }
@@ -136,6 +144,7 @@ public class Window {
             if (dt >= 0)
                 currentScene.update(dt);
 
+            this.imGuiLayer.update(dt, currentScene);
             glfwSwapBuffers(glfwWindow);
 
             endTime = (float)glfwGetTime();
@@ -146,5 +155,17 @@ public class Window {
 
     public static Scene getScene() {
         return get().currentScene;
+    }
+    public static int getWidth() {
+        return get().width;
+    }
+    public static int getHeight() {
+        return get().height;
+    }
+    public static void setWidth(int w) {
+        get().width = w;
+    }
+    public static void setHeight(int h) {
+        get().height = h;
     }
 }

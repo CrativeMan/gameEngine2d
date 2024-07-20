@@ -1,5 +1,6 @@
 package roki.scene;
 
+import imgui.ImGui;
 import roki.entityComponent.GameObject;
 import roki.renderer.Camera;
 import roki.renderer.Renderer;
@@ -13,6 +14,7 @@ public abstract class Scene {
     protected Camera camera;
     private boolean isRunning = false;
     protected List<GameObject> gameObjects = new ArrayList<>();
+    protected GameObject activeGameObject = null;
 
     public Scene() {
     }
@@ -32,7 +34,7 @@ public abstract class Scene {
     }
 
     public void addGameObjectToScene(GameObject go) {
-        if(!isRunning) {
+        if (!isRunning) {
             gameObjects.add(go); // if not running, just add
         } else {
             gameObjects.add(go); // if running, add and start, add to renderer
@@ -45,5 +47,19 @@ public abstract class Scene {
 
     public Camera camera() {
         return this.camera;
+    }
+
+    public void sceneImgui() {
+        if (activeGameObject != null) {
+            ImGui.begin("Inspector");
+            activeGameObject.imgui();
+            ImGui.end();
+        }
+
+        imgui();
+    }
+
+    public void imgui() {
+
     }
 }
