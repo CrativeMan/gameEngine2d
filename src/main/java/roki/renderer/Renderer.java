@@ -14,7 +14,7 @@ public class Renderer {
         this.batches = new ArrayList<>();
     }
 
-    public void add(GameObject go) {
+    public void add(GameObject go) { // add called by other classes
         SpriteRenderer spr = go.getComponent(SpriteRenderer.class);
         if (spr != null) {
             add(spr);
@@ -24,14 +24,14 @@ public class Renderer {
     private void add(SpriteRenderer spr) {
         boolean added = false;
         for (RenderBatch batch : batches) {
-            if (batch.hasRoom()) {
+            if (batch.hasRoom()) { // if current batch has room, add sprite to batch
                 batch.addSprite(spr);
                 added = true;
                 break;
             }
         }
 
-        if (!added) {
+        if (!added) { // if not create a new batch
             RenderBatch newBatch = new RenderBatch(MAX_BATCH_SIZE);
             newBatch.start();
             batches.add(newBatch);

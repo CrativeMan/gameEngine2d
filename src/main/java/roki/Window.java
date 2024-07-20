@@ -50,7 +50,7 @@ public class Window {
         }
     }
 
-    public static Window get() {
+    public static Window get() { // make sure only one instance is running at all times
         if (Window.window == null) {
             Window.window = new Window();
         }
@@ -63,6 +63,7 @@ public class Window {
         init();
         loop();
 
+        // freeing memory
         glfwFreeCallbacks(glfwWindow);
         glfwDestroyWindow(glfwWindow);
 
@@ -83,7 +84,7 @@ public class Window {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_MAXIMIZED, GLFW_FALSE);
+        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
 
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
         if (glfwWindow == NULL) {
@@ -116,7 +117,7 @@ public class Window {
     }
 
     public void loop() {
-        float beginTime = (float)glfwGetTime();
+        float beginTime = (float)glfwGetTime(); // set time at begin of frame
         float endTime;
         float dt = -1.0f;
 
@@ -124,6 +125,7 @@ public class Window {
             // get events
             glfwPollEvents();
 
+            // set background
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
@@ -133,7 +135,7 @@ public class Window {
             glfwSwapBuffers(glfwWindow);
 
             endTime = (float)glfwGetTime();
-            dt = endTime - beginTime;
+            dt = endTime - beginTime; // calculate delta time
             beginTime = endTime;
         }
     }

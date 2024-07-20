@@ -22,7 +22,7 @@ public class Shader {
         this.filepath = filepath;
         try {
             String source = new String(Files.readAllBytes(Paths.get(filepath)));
-            String[] splitString = source.split("(#type)( )+([a-zA-Z]+)");
+            String[] splitString = source.split("(#type)( )+([a-zA-Z]+)"); // split string at #type *
 
             // ? find patterns
             int index = source.indexOf("#type") + 6;

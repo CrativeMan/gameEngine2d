@@ -34,11 +34,24 @@ out vec4 color;
 
 void main()
 {
-    if (fTexId > 0) {
-        int id = int(fTexId);
-        color = fColor * texture(uTextures[id], fTexCoords);
-        //color = vec4(fTexCoords, 0, 1);
-    } else {
+    if (fTexId == 0) {
         color = fColor;
+    } else if (fTexId == 1) {
+        color = fColor * texture(uTextures[1], fTexCoords);
+    } else if (fTexId == 2) {
+        color = fColor * texture(uTextures[2], fTexCoords);
+    } else if (fTexId == 3) {
+        color = fColor * texture(uTextures[3], fTexCoords);
+    } else if (fTexId == 4) {
+        color = fColor * texture(uTextures[4], fTexCoords);
+    } else if (fTexId == 5) {
+        color = fColor * texture(uTextures[5], fTexCoords);
+    } else if (fTexId == 6) {
+        color = fColor * texture(uTextures[6], fTexCoords);
+    } else if (fTexId == 7) {
+        color = fColor * texture(uTextures[7], fTexCoords);
+    }
+    else {
+        color = vec4(1.0); // Fallback color or handle error
     }
 }

@@ -6,8 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.stb.STBImage.stbi_image_free;
-import static org.lwjgl.stb.STBImage.stbi_load;
+import static org.lwjgl.stb.STBImage.*;
 
 public class Texture {
     private String filepath;
@@ -31,12 +30,13 @@ public class Texture {
         IntBuffer width = BufferUtils.createIntBuffer(1);
         IntBuffer height = BufferUtils.createIntBuffer(1);
         IntBuffer channels = BufferUtils.createIntBuffer(1);
+        stbi_set_flip_vertically_on_load(true); // flip image, ogl is weird
         ByteBuffer image = stbi_load(filepath, width, height, channels, 0);
 
         if (image != null) {
-            if (channels.get(0) == 3) {
+            if (channels.get(0) == 3) { // if only 3 channels rgb
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width.get(), height.get(), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-            } else if (channels.get(0) == 4) {
+            } else if (channels.get(0) == 4) { // if 4 channels rbga
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.get(), height.get(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
             } else {
                 assert false : "Error: (Texture) Unknown number of channels '" + channels.get(0) + "'";

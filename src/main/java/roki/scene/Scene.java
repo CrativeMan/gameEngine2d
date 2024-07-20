@@ -22,6 +22,8 @@ public abstract class Scene {
     }
 
     public void start() {
+        // when scene is started, start all game objects
+        // and add them to the renderer to render
         for (GameObject go : gameObjects) {
             go.start();
             this.renderer.add(go);
@@ -31,9 +33,9 @@ public abstract class Scene {
 
     public void addGameObjectToScene(GameObject go) {
         if(!isRunning) {
-            gameObjects.add(go);
+            gameObjects.add(go); // if not running, just add
         } else {
-            gameObjects.add(go);
+            gameObjects.add(go); // if running, add and start, add to renderer
             go.start();
             this.renderer.add(go);
         }

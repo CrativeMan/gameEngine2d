@@ -104,6 +104,7 @@ public class RenderBatch {
         this.sprites[index] = spr;
         this.numSprites++;
 
+        // if textures has no room more, set a flag to true and then check in renderer
         if (spr.getTexture() != null) {
             if (!textures.contains(spr.getTexture())) {
                 textures.add(spr.getTexture());
@@ -129,7 +130,7 @@ public class RenderBatch {
 
         // bind textures to texture slots and upload to shader
         for (int i = 0; i < textures.size(); i++) {
-            glActiveTexture(GL_TEXTURE0 + i);
+            glActiveTexture(GL_TEXTURE0 + i + 1);
             textures.get(i).bind();
         }
         shader.uploadIntArray("uTextures", texSlots);
