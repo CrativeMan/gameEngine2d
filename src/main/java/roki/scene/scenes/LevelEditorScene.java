@@ -4,6 +4,7 @@ import org.joml.Vector2f;
 import roki.entityComponent.GameObject;
 import roki.entityComponent.Transform;
 import roki.entityComponent.components.SpriteRenderer;
+import roki.entityComponent.components.SpriteSheet;
 import roki.listeners.KeyListener;
 import roki.renderer.Camera;
 import roki.scene.Scene;
@@ -18,23 +19,36 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+        loadResources();
+
         this.camera = new Camera(new Vector2f(-250, 0));
 
+        SpriteSheet sprites = AssetPool.getSpriteSheet("assets/textures/spritesheet.png");
+
         int asd = 10;
+        int index = 0;
         for (int x = 0; x < 100; x++) {
             for (int y = 0; y < 100; y++) {
-                GameObject go = new GameObject("Object "+x+" "+y, new Transform(new Vector2f(x * asd, y * asd), new Vector2f(asd, asd)));
-                go.addComponent(new SpriteRenderer(AssetPool.getTexture("assets/textures/testImage.png")));
-                this.renderer.add(go);
+                GameObject go = new GameObject("Go: " + x + " " + y, new Transform(new Vector2f(x * asd, y * asd), new Vector2f(asd, asd)));
+                if (index >= 26) {
+                    index = 0;
+                    go.addComponent(new SpriteRenderer(sprites.getSprite(index)));
+                    index ++;
+                } else {
+                    go.addComponent(new SpriteRenderer(sprites.getSprite(index)));
+                    index++;
+                }
+                this.addGameObjectToScene(go);
             }
         }
 
-
-        loadResources();
     }
 
     private void loadResources() {
         AssetPool.getShader("assets/shaders/default.glsl");
+        AssetPool.addSpriteSheet("assets/textures/spritesheet.png",
+                new SpriteSheet(AssetPool.getTexture("assets/textures/spritesheet.png"),
+                        16, 16, 26, 0));
     }
 
     @Override
