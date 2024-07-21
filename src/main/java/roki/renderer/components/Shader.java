@@ -1,4 +1,4 @@
-package roki.renderer;
+package roki.renderer.components;
 
 import org.joml.*;
 import org.lwjgl.BufferUtils;

@@ -1,8 +1,8 @@
 package util;
 
 import roki.entityComponent.components.SpriteSheet;
-import roki.renderer.Shader;
-import roki.renderer.Texture;
+import roki.renderer.components.Shader;
+import roki.renderer.components.Texture;
 
 import java.io.File;
 import java.util.HashMap;

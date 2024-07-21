@@ -1,4 +1,4 @@
-package roki.renderer;
+package roki.renderer.components;
 
 import org.lwjgl.BufferUtils;
 
@@ -65,5 +65,9 @@ public class Texture {
 
     public int getHeight() {
         return this.height;
+    }
+
+    public int getTexID() {
+        return texID;
     }
 }

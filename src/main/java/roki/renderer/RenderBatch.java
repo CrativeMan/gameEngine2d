@@ -4,6 +4,8 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 import roki.Window;
 import roki.entityComponent.components.SpriteRenderer;
+import roki.renderer.components.Shader;
+import roki.renderer.components.Texture;
 import util.AssetPool;
 
 import java.util.ArrayList;

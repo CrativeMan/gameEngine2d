@@ -1,5 +1,8 @@
 package roki.listeners;
 
+import org.joml.Vector4f;
+import roki.Window;
+
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
@@ -7,7 +10,7 @@ public class MouseListener {
     private static MouseListener instance;
     private double scrollX, scrollY;
     private double xPos, yPos, lastX, lastY;
-    private boolean mouseButtonPressed[] = new boolean[3];
+    private boolean mouseButtonPressed[] = new boolean[9];
     private boolean isDragging;
 
     private MouseListener() {
@@ -68,11 +71,11 @@ public class MouseListener {
         return (float) (get().lastY - get().yPos);
     }
 
-    public static double getScrollX() {
+    public static float getScrollX() {
         return (float) get().scrollX;
     }
 
-    public static double getScrollY() {
+    public static float getScrollY() {
         return (float) get().scrollY;
     }
 
@@ -80,15 +83,35 @@ public class MouseListener {
         return get().isDragging;
     }
 
-    public static double getxPos() {
+    public static float getxPos() {
         return (float) get().xPos;
     }
 
-    public static double getyPos() {
+    public static float getyPos() {
         return (float) get().yPos;
     }
 
-    public static boolean mosueButtonDown(int button) {
+    public static float getOrthoX() {
+        float currX = getxPos();
+        currX = (currX / (float) Window.getWidth()) * 2 - 1;
+        Vector4f tmp = new Vector4f(currX, 0, 0, 1);
+        tmp.mul(Window.getScene().camera().getInverseprojection()).mul(Window.getScene().camera().getInverseView());
+        currX = tmp.x;
+
+        return currX;
+    }
+
+    public static float getOrthoY() {
+        float currY = Window.getHeight() - getyPos();
+        currY = (currY / (float) Window.getHeight()) * 2.0f - 1.0f;
+        Vector4f tmp = new Vector4f(0, currY, 0, 1);
+        tmp.mul(Window.getScene().camera().getInverseprojection()).mul(Window.getScene().camera().getInverseView());
+        currY = tmp.y;
+
+        return currY;
+    }
+
+    public static boolean mouseButtonDown(int button) {
         if (button < get().mouseButtonPressed.length) {
             return get().mouseButtonPressed[button];
         } else {

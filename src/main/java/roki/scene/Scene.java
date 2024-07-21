@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import imgui.ImGui;
 import roki.entityComponent.Component;
 import roki.entityComponent.GameObject;
-import roki.renderer.Camera;
 import roki.renderer.Renderer;
+import roki.renderer.components.Camera;
 import serilization.ComponentTypeAdapter;
 import serilization.GameObjectDeserializer;
 
@@ -103,10 +103,29 @@ public abstract class Scene {
         }
 
         if (!inFile.isEmpty()) {
+            int maxGoId = -1;
+            int maxCompId = -1;
+
             GameObject[] objs = gson.fromJson(inFile, GameObject[].class);
             for (GameObject obj : objs) {
                 addGameObjectToScene(obj);
+
+                for (Component c : obj.getComponents()) {
+                    if (c.getUid() > maxCompId) {
+                        maxCompId = c.getUid();
+                    }
+                }
+                if (obj.getUid() > maxGoId) {
+                    maxGoId = obj.getUid();
+                }
             }
+
+            maxGoId++;
+            maxCompId++;
+            System.out.println(maxGoId);
+            System.out.println(maxCompId);
+            GameObject.init(maxGoId);
+            Component.init(maxCompId);
             this.levelLoaded = true;
         }
     }

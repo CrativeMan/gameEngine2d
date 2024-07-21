@@ -2,6 +2,7 @@ package roki.renderer;
 
 import roki.entityComponent.GameObject;
 import roki.entityComponent.components.SpriteRenderer;
+import roki.renderer.components.Texture;
 
 import java.util.ArrayList;
 import java.util.Collections;
