@@ -7,7 +7,6 @@ import roki.entityComponent.GameObject;
 import roki.entityComponent.Prefabs;
 import roki.entityComponent.Transform;
 import roki.entityComponent.components.Sprite;
-import roki.entityComponent.components.SpriteRenderer;
 import roki.entityComponent.components.SpriteSheet;
 import roki.entityComponent.levelEditor.GridLines;
 import roki.entityComponent.levelEditor.MouseControls;
@@ -17,7 +16,6 @@ import util.AssetPool;
 
 public class LevelEditorScene extends Scene {
 
-    private SpriteRenderer obj1Sprite;
     private SpriteSheet sprites;
 
     GameObject levelEditor = new GameObject("LevelEditor", new Transform(new Vector2f()), 0);
@@ -33,7 +31,7 @@ public class LevelEditorScene extends Scene {
         this.camera = new Camera(new Vector2f(-250, 0));
         sprites = AssetPool.getSpriteSheet("assets/textures/spritesheets/decorationsAndBlocks.png");
         if (levelLoaded) {
-            this.activeGameObject = gameObjects.getFirst();
+            this.activeGameObject = gameObjects.get(0);
             return;
         }
 
